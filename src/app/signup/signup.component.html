@@ -1,1 +1,27 @@
-<p>signup works!</p>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Create an account</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-form-field>
+            <mat-label>Enter your email</mat-label>
+            <input matInput #email placeholder="example@email.com" [formControl]="emailError" required>
+            <mat-error *ngIf="emailError.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+    <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput #username placeholder="Enter a username">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Enter your password</mat-label>
+        <input matInput #password [type]="hide ? 'password' : 'text'" required>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button (click)="signup(email.value, password.value)">Create Account</button>
+    <br>
+    <p>Already have an account? <a routerLink="/login">Log in.</a></p>
+    </mat-card-content>
+</mat-card>

@@ -4,14 +4,22 @@
     </mat-card-header>
     <mat-card-content>
     <mat-form-field>
-        <mat-label>Username</mat-label>
-        <input matInput placeholder="Enter your username">
+        <mat-label>Enter your email</mat-label>
+        <input matInput #email placeholder="example@email.com" [formControl]="emailError" required>
+        <mat-error *ngIf="emailError.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
-        <mat-label>Password</mat-label>
-        <input matInput placeholder="Enter your password">
+        <mat-label>Enter your password</mat-label>
+        <input matInput #password [type]="hide ? 'password' : 'text'" required>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
     </mat-form-field>
     <br>
-    <button mat-raised-button>Login</button>
+    <button mat-raised-button (click)="login(email.value, password.value)">Login</button>
+    <br>
+    
+    <p>Don't have an account? <a routerLink="/signup">Sign up.</a></p>
+
     </mat-card-content>
 </mat-card>
