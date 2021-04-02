@@ -17,8 +17,8 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  signup(email: string, password: string) {
-    this.authService.register(email, password);
+  signup(email: string, password: string, username: string) {
+    this.authService.register(email, password, username);
   }
 
   getErrorMessage() {

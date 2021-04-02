@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,10 +9,16 @@ import { Component, OnInit } from '@angular/core';
 export class DashboardComponent implements OnInit {
 
   fillerNav = ["Cryptocurrency", "Stocks"];
+  username: string;
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.username = this.authService.displayName;
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
 }

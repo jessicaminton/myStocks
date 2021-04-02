@@ -4,6 +4,8 @@
 }
 
 .header {
-    display: inline-flex;
+    display: flex;
+    justify-content:center;
     flex-direction: row;
+    margin: 15px;
 }

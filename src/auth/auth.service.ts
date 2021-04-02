@@ -7,13 +7,20 @@ import { AngularFireAuth } from '@angular/fire/auth';
   providedIn: 'root'
 })
 export class AuthService {
+
   user: firebase.User;
+  displayName: string;
+
   constructor(
     public afAuth: AngularFireAuth,
     public router: Router) { 
       this.afAuth.authState.subscribe(user => {
         if(user){
           this.user = user;
+          this.user.updateProfile({
+            displayName: this.displayName
+          });
+          this.displayName = user.displayName;
           localStorage.setItem('user', JSON.stringify(this.user));
         } else {
           localStorage.setItem('user', null);
@@ -26,8 +33,9 @@ export class AuthService {
       this.router.navigate(['/dashboard']);
     }
 
-    async register(email: string, password: string) {
+    async register(email: string, password: string, username: string) {
       var result = await this.afAuth.createUserWithEmailAndPassword(email, password);
+      this.displayName = username;
       this.sendEmailVerification();
     }
 
