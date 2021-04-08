@@ -19,6 +19,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { DetailsComponent } from './details/details.component';
+import { HttpClientModule } from '@angular/common/http';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -37,7 +41,8 @@ const firebaseConfig = {
     LoginComponent,
     SignupComponent,
     DashboardComponent,
-    EmailVerificationComponent
+    EmailVerificationComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +58,9 @@ const firebaseConfig = {
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
+    MatTableModule,
+    MatPaginatorModule,
+    HttpClientModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule
   ],
