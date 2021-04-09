@@ -2,11 +2,18 @@
     <button mat-icon-button class="example-icon" (click)="goBack()">
         <mat-icon>arrow_back</mat-icon>
     </button>
-   <span>Monthly prices for {{name}} ({{symbol}})</span>
+   <span *ngIf="monthly">Monthly prices for {{name}} ({{symbol}})</span>
+   <span *ngIf="daily">Daily prices for {{name}} ({{symbol}})</span>
+   <span *ngIf="weekly">Weekly prices for {{name}} ({{symbol}})</span>
     <span class="example-spacer"></span> 
-    <button mat-icon-button class="example-icon favorite-icon" >
+    <button mat-icon-button class="example-icon favorite-icon" [matMenuTriggerFor]="menu">
       <mat-icon>menu</mat-icon>
     </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="getDaily()">Daily</button>
+        <button mat-menu-item (click)="getWeekly()">Weekly</button>
+        <button mat-menu-item (click)="getMonthly()">Monthly</button>
+      </mat-menu>
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()">
       <mat-icon>logout</mat-icon>
     </button>

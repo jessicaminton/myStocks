@@ -23,6 +23,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { DetailsComponent } from './details/details.component';
 import { HttpClientModule } from '@angular/common/http';
+import {MatMenuModule} from '@angular/material/menu';
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -61,6 +62,7 @@ const firebaseConfig = {
     MatTableModule,
     MatPaginatorModule,
     HttpClientModule,
+    MatMenuModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule
   ],

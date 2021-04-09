@@ -127,6 +127,7 @@ export class DashboardComponent implements OnInit {
   displayedColumns: string[] = ['position', 'symbol', 'name', 'button'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  data = ELEMENT_DATA;
 
   constructor(private authService: AuthService,
     private stockService: StockService,
@@ -134,7 +135,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.username = this.storage["displayName"];
-    
+    this.stockService.getHealth();
   }
 
   ngAfterViewInit(): void {
