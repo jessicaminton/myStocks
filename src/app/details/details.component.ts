@@ -38,11 +38,16 @@ export class DetailsComponent implements OnInit {
   monthly: boolean;
   daily: boolean;
   weekly: boolean;
-  
+  health: string;
   
 
   ngOnInit() {
     this.getDaily();
+    this.stockService.getHealth().subscribe(stock =>
+      setTimeout(() => {
+        this.health = stock["Crypto Rating (FCAS)"]["3. fcas rating"];
+        console.log(this.health);
+      }, 1000));
   }
 
   logout() {
@@ -54,9 +59,7 @@ export class DetailsComponent implements OnInit {
   }
 
   getDaily() {
-    this.monthly = false;
-    this.weekly = false;
-    this.daily = true;
+    
     
     this.stockService.getDaily().subscribe(stock =>
       setTimeout(() => {
@@ -70,13 +73,14 @@ export class DetailsComponent implements OnInit {
           this.dates[i] = {date: arr[i][0], value: (arr[i][1]["4b. close (USD)"]).slice(0,-6)};
         }
         this.table.renderRows();
+        this.monthly = false;
+        this.weekly = false;
+        this.daily = true;
       }, 1000));
   }
 
   getMonthly() {
-    this.daily = false;
-    this.weekly = false;
-    this.monthly = true;
+    
     this.stockService.getMonthly().subscribe(stock =>
       setTimeout(() => {
         this.stockData = stock;
@@ -89,13 +93,14 @@ export class DetailsComponent implements OnInit {
           this.dates[i] = {date: arr[i][0], value: (arr[i][1]["4b. close (USD)"]).slice(0,-6)};
         }
         this.table.renderRows();
+        this.daily = false;
+        this.weekly = false;
+        this.monthly = true;
       }, 1000));
   }
 
   getWeekly() {
-    this.daily = false;
-    this.monthly = false;
-    this.weekly = true;
+    
     this.stockService.getWeekly().subscribe(stock =>
       setTimeout(() => {
         this.stockData = stock;
@@ -108,6 +113,9 @@ export class DetailsComponent implements OnInit {
           this.dates[i] = {date: arr[i][0], value: (arr[i][1]["4b. close (USD)"]).slice(0,-6)};
         }
         this.table.renderRows();
+        this.daily = false;
+        this.monthly = false;
+        this.weekly = true;
       }, 1000));
   }
 

@@ -19,19 +19,26 @@
     </button>
 </mat-toolbar>
 <mat-card>
-    <mat-card-content>
-        <table mat-table [dataSource]="dates" class="mat-elevation-z8">
-            <ng-container matColumnDef="date">
-                <th mat-header-cell *matHeaderCellDef> Dates </th>
-                <td mat-cell *matCellDef="let element"> {{element.date}} </td>
-            </ng-container>
-            <ng-container matColumnDef="value">
-                <th mat-header-cell *matHeaderCellDef> USD Value </th>
-                <td mat-cell *matCellDef="let element"> ${{element.value}} </td>
-            </ng-container>
-            
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-    </mat-card-content>
+    <mat-card-header><h1>FCAS Rating: <span [ngClass]="{
+        'is-superb': health === 'Superb',
+        'is-attractive': health === 'Attractive',
+        'is-basic': health === 'Basic',
+        'is-caution': health === 'Caution',
+        'is-fragile': health === 'Fragile'
+      }">{{health}}</span></h1></mat-card-header>
+        <mat-card-content>
+            <table mat-table [dataSource]="dates" class="mat-elevation-z8">
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef> Dates </th>
+                    <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                </ng-container>
+                <ng-container matColumnDef="value">
+                    <th mat-header-cell *matHeaderCellDef> USD Value </th>
+                    <td mat-cell *matCellDef="let element"> ${{element.value}} </td>
+                </ng-container>
+                
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </mat-card-content>
 </mat-card>

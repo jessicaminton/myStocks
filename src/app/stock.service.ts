@@ -54,15 +54,8 @@ export class StockService {
   }
 
   getHealth() {
-    this.httpOptions = {
-      params: {market: 'USD', function: 'CRYPTO_RATING', symbol: 'BTC'},
-      headers: {
-        'x-rapidapi-key': '5fdedbbef3mshec20e9f64ba028fp1e433cjsn7bf6a02686d0',
-        'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com',
-        'useQueryString': true
-      }
-    };
-    let url = "https://alpha-vantage.p.rapidapi.com/query";
-    return this.http.get(url, this.httpOptions);
+    let url = "https://www.alphavantage.co/query?function=CRYPTO_RATING&symbol=" + this.sym + 
+    "&apikey=5fdedbbef3mshec20e9f64ba028fp1e433cjsn7bf6a02686d0";
+    return this.http.get(url);
   }
 }
