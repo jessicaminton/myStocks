@@ -15,7 +15,7 @@ import { Symbol } from '../symbol';
 export class DashboardComponent implements OnInit {
 
   fillerNav = ["Cryptocurrency", "Stocks"];
-  storage: object = JSON.parse(localStorage.getItem("user"));
+  storage: object;
   username: string;
   displayedColumns: string[] = ['position', 'symbol', 'name', 'button'];
   dataSource = new MatTableDataSource<Symbol>(SYMBOL_DATA);
@@ -24,10 +24,15 @@ export class DashboardComponent implements OnInit {
 
   constructor(private authService: AuthService,
     private stockService: StockService,
-    public router: Router) { }
+    public router: Router) {
+     }
 
   ngOnInit(): void {
-    this.username = this.storage["displayName"];
+    setTimeout(() => {
+      this.storage = JSON.parse(localStorage.getItem("user"));
+      this.username = this.storage["displayName"];
+    }, 1000);
+    
   }
 
   ngAfterViewInit(): void {
@@ -42,6 +47,11 @@ export class DashboardComponent implements OnInit {
     this.stockService.setSymbol(sym.symbol);
     this.router.navigate(['/details']);
 
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }

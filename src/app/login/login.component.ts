@@ -11,6 +11,7 @@ export class LoginComponent implements OnInit {
 
   emailError = new FormControl('', [Validators.required, Validators.email]);
   hide = true;
+  title = 'My Stocks';
 
   constructor(private authService: AuthService) { }
 
