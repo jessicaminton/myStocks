@@ -1,0 +1,28 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button  class="example-icon" (click)="home()">
+        <mat-icon>home</mat-icon>
+    </button>
+    <span>Favorites for {{name}}</span>
+    <span class="example-spacer"></span> 
+    <button mat-icon-button  class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+    </button>
+</mat-toolbar>
+<mat-card>
+      <mat-card-content>
+          <table mat-table [dataSource]="favs" class="mat-elevation-z8">
+              <ng-container matColumnDef="coins">
+                  <th mat-header-cell *matHeaderCellDef> Cryptocurrencies </th>
+                  <td mat-cell *matCellDef="let element"> {{element.coin}} </td>
+              </ng-container>
+              <ng-container matColumnDef="button">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-button (click)="viewDetails(element)"> View </button>
+                </td>
+            </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+      </mat-card-content>
+</mat-card>

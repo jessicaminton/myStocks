@@ -1,7 +1,8 @@
 <div class="example-container">
     <mat-toolbar color="primary" class="example-toolbar">
         <h1 class="example-app-name">Welcome, {{username}}!</h1>
-        <button class="logout" mat-icon-button (click)="logout()"><mat-icon>logout</mat-icon></button>
+        <button class="left" mat-icon-button (click)="goToFavs()"><mat-icon>collections_bookmark</mat-icon></button>
+        <button mat-icon-button (click)="logout()"><mat-icon >logout</mat-icon></button>
     </mat-toolbar>
     <div class="content">
         <mat-form-field>
@@ -25,6 +26,7 @@
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let element">
                     <button mat-button (click)="viewDetails(element)"> View </button>
+                    
                 </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

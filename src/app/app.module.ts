@@ -24,6 +24,11 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { DetailsComponent } from './details/details.component';
 import { HttpClientModule } from '@angular/common/http';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { FavoritesComponent } from './favorites/favorites.component';
+
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -43,7 +48,8 @@ const firebaseConfig = {
     SignupComponent,
     DashboardComponent,
     EmailVerificationComponent,
-    DetailsComponent
+    DetailsComponent,
+    FavoritesComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +68,10 @@ const firebaseConfig = {
     MatTableModule,
     MatPaginatorModule,
     HttpClientModule,
+    MatTooltipModule,
     MatMenuModule,
+    MatCheckboxModule,
+    AngularFirestoreModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule
   ],

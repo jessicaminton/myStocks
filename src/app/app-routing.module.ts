@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailsComponent } from './details/details.component';
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
+import { FavoritesComponent } from './favorites/favorites.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent},
   { path: 'dashboard', component: DashboardComponent},
   { path: 'verification', component: EmailVerificationComponent},
-  { path: 'details', component: DetailsComponent}
+  { path: 'details', component: DetailsComponent},
+  { path: 'favorites', component: FavoritesComponent}
 ];
 
 @NgModule({

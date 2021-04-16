@@ -21,16 +21,21 @@ export class DashboardComponent implements OnInit {
   dataSource = new MatTableDataSource<Symbol>(SYMBOL_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   data = SYMBOL_DATA;
+  symbols: string[] = [];
+  icon: string = 'bookmark_add';
+  added: boolean = true;
 
   constructor(private authService: AuthService,
     private stockService: StockService,
     public router: Router) {
+      
      }
 
-  ngOnInit(): void {
+  ngOnInit() {
     setTimeout(() => {
       this.storage = JSON.parse(localStorage.getItem("user"));
       this.username = this.storage["displayName"];
+      this.authService.getCoins();
     }, 1000);
     
   }
@@ -52,6 +57,10 @@ export class DashboardComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  goToFavs() {
+    this.router.navigate(['/favorites']);
   }
 
 }

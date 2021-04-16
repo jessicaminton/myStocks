@@ -39,15 +39,11 @@ export class DetailsComponent implements OnInit {
   daily: boolean;
   weekly: boolean;
   health: string;
-  
+  icon: string = 'bookmark_add';
+  coins: any;
 
   ngOnInit() {
     this.getDaily();
-    this.stockService.getHealth().subscribe(stock =>
-      setTimeout(() => {
-        this.health = stock["Crypto Rating (FCAS)"]["3. fcas rating"];
-        console.log(this.health);
-      }, 1000));
   }
 
   logout() {
@@ -59,15 +55,13 @@ export class DetailsComponent implements OnInit {
   }
 
   getDaily() {
-    
-    
     this.stockService.getDaily().subscribe(stock =>
       setTimeout(() => {
         this.stockData = stock;
         console.log(this.stockData);
         this.name = this.stockData["Meta Data"]["3. Digital Currency Name"];
         this.symbol = this.stockData["Meta Data"]["2. Digital Currency Code"];
-        
+        this.getCoins();
         let arr = Object.entries(stock["Time Series (Digital Currency Daily)"]);
         for(var i = 0; i < 33; i++) {
           this.dates[i] = {date: arr[i][0], value: (arr[i][1]["4b. close (USD)"]).slice(0,-6)};
@@ -80,7 +74,6 @@ export class DetailsComponent implements OnInit {
   }
 
   getMonthly() {
-    
     this.stockService.getMonthly().subscribe(stock =>
       setTimeout(() => {
         this.stockData = stock;
@@ -100,7 +93,6 @@ export class DetailsComponent implements OnInit {
   }
 
   getWeekly() {
-    
     this.stockService.getWeekly().subscribe(stock =>
       setTimeout(() => {
         this.stockData = stock;
@@ -117,6 +109,34 @@ export class DetailsComponent implements OnInit {
         this.monthly = false;
         this.weekly = true;
       }, 1000));
+  }
+
+  favorite() {
+    if(this.icon === 'bookmark_add') {
+      this.authService.addToFavs(this.symbol);
+      this.icon = 'turned_in';
+    } else {
+      this.authService.removeFromFavs(this.symbol);
+      this.icon = 'bookmark_add';
+    }
+  }
+
+  getCoins() {
+    setTimeout(() => {
+      this.coins = this.authService.coins;
+      for(let i = 0; i < this.coins[0][1].length;i++) {
+        if(this.coins[0][1][i] === this.symbol) {
+          this.icon = 'turned_in';
+          break;
+        } else {
+          this.icon = 'bookmark_add';
+        }
+      }
+    }, 1000);
+  }
+
+  goToFavs() {
+    this.router.navigate(['/favorites']);
   }
 
 }
