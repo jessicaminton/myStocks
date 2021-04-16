@@ -33,8 +33,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      this.storage = JSON.parse(localStorage.getItem("user"));
-      this.username = this.storage["displayName"];
+      this.username = this.authService.displayName;
       this.authService.getCoins();
     }, 1000);
     

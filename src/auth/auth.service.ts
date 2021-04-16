@@ -11,7 +11,6 @@ import { subscribeToPromise } from 'rxjs/internal-compatibility';
 })
 export class AuthService {
 
-  user: firebase.User;
   displayName: string;
   coins;
   symbol: string;
@@ -23,28 +22,31 @@ export class AuthService {
     private afs: AngularFirestore) { 
       this.afAuth.authState.subscribe(user => {
         if(user){
-          this.user = user;
-          this.user.updateProfile({
-            displayName: this.displayName
-          });
-          this.displayName = user.displayName;
-          localStorage.setItem('user', JSON.stringify(this.user));
+          localStorage.setItem('user', JSON.stringify(user));
         } else {
           localStorage.setItem('user', null);
         }
       });
-      
     }
 
     async login(email: string, password: string) {
       var result = await this.afAuth.signInWithEmailAndPassword(email, password);
+      this.afAuth.authState.subscribe(user => {
+        this.displayName = user.displayName
+      });
       this.router.navigate(['/dashboard']);
     }
 
     async register(email: string, password: string, username: string) {
       var result = await this.afAuth.createUserWithEmailAndPassword(email, password);
-      this.displayName = username;
-      this.afs.collection("users").doc(this.displayName).set({});
+      this.afAuth.authState.subscribe(user => {
+        user.updateProfile({
+          displayName: username
+        });
+      });
+      this.afs.collection("users").doc(username).set({
+        coins: []
+      });
       this.sendEmailVerification();
     }
 
@@ -80,12 +82,12 @@ export class AuthService {
       });
     }
 
-   getCoins() {
+    getCoins() {
     this.afs.collection("users").doc(this.displayName).get()
     .toPromise().then((doc) => {
       this.coins = Object.entries(doc.data());
       console.log(this.coins);
-    })
+    });
 
     //  var sym = "BTC";
     //  var query = this.afs.collection("users", ref => ref.where("coins", "array-contains", sym));
