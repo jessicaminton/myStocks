@@ -5,6 +5,9 @@
     width: 100%;
   }
 
+  .toolbar {
+    justify-self: flex-end;
+  }
   span.is-superb{
     color: #6ee886;
   }
@@ -20,3 +23,5 @@
   span.is-fragile{
     color: #ed474a;
   }
+
+  

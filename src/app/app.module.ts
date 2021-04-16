@@ -28,6 +28,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { FavoritesComponent } from './favorites/favorites.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatTreeModule} from '@angular/material/tree';
+import {OverlayModule} from '@angular/cdk/overlay';
 
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -71,6 +74,9 @@ const firebaseConfig = {
     MatTooltipModule,
     MatMenuModule,
     MatCheckboxModule,
+    FlexLayoutModule,
+    MatTreeModule,
+    OverlayModule,
     AngularFirestoreModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule

@@ -1,46 +1,50 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="toolbar">
     <button mat-icon-button  class="example-icon" (click)="goBack()">
         <mat-icon >arrow_back</mat-icon>
     </button>
-   <span *ngIf="monthly">Monthly prices for {{name}} ({{symbol}})</span>
-   <span *ngIf="daily">Daily prices for {{name}} ({{symbol}})</span>
-   <span *ngIf="weekly">Weekly prices for {{name}} ({{symbol}})</span>
-    <button mat-icon-button><mat-icon (click)="favorite()">
-      <span class="material-icons-outlined">{{icon}}</span>
-     </mat-icon></button>
-    <span class="example-spacer"></span> 
-    <button mat-icon-button  class="example-icon favorite-icon" [matMenuTriggerFor]="menu">
+   <span style='font-size:15px;' *ngIf="monthly">Monthly prices for {{name}} ({{symbol}})</span>
+   <span style='font-size:15px;' *ngIf="daily">Daily prices for {{name}} ({{symbol}})</span>
+   <span style='font-size:15px;' *ngIf="weekly">Weekly prices for {{name}} ({{symbol}})</span>
+   <span class="example-spacer"></span> 
+
+  
+
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item   [matMenuTriggerFor]="times">
       <mat-icon>menu</mat-icon>
     </button>
-    <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="getDaily()">Daily</button>
-        <button mat-menu-item (click)="getWeekly()">Weekly</button>
-        <button mat-menu-item (click)="getMonthly()">Monthly</button>
-      </mat-menu>
-    <button mat-icon-button  class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()">
+    <button mat-menu-item ><mat-icon (click)="favorite()">
+      <span class="material-icons-outlined">{{icon}}</span>
+     </mat-icon></button>
+    <button  mat-menu-item (click)="logout()">
       <mat-icon>logout</mat-icon>
     </button>
+  </mat-menu>
+
+  <mat-menu #times="matMenu">
+    <button mat-menu-item (click)="getDaily()">Daily</button>
+    <button mat-menu-item (click)="getWeekly()">Weekly</button>
+    <button mat-menu-item (click)="getMonthly()">Monthly</button>
+  </mat-menu>
+  
 </mat-toolbar>
 <mat-card>
-    <mat-card-header><h1>FCAS Rating: <span [ngClass]="{
-        'is-superb': health === 'Superb',
-        'is-attractive': health === 'Attractive',
-        'is-basic': health === 'Basic',
-        'is-caution': health === 'Caution',
-        'is-fragile': health === 'Fragile'
-      }">{{health}}</span></h1></mat-card-header>
-        <mat-card-content>
-            <table mat-table [dataSource]="dates" class="mat-elevation-z8">
-                <ng-container matColumnDef="date">
-                    <th mat-header-cell *matHeaderCellDef> Dates </th>
-                    <td mat-cell *matCellDef="let element"> {{element.date}} </td>
-                </ng-container>
-                <ng-container matColumnDef="value">
-                    <th mat-header-cell *matHeaderCellDef> USD Value </th>
-                    <td mat-cell *matCellDef="let element"> ${{element.value}} </td>
-                </ng-container>
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-        </mat-card-content>
+  <mat-card-content>
+      <table mat-table [dataSource]="dates" class="mat-elevation-z8">
+          <ng-container matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef> Dates </th>
+              <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+          </ng-container>
+          <ng-container matColumnDef="value">
+              <th mat-header-cell *matHeaderCellDef> USD Value </th>
+              <td mat-cell *matCellDef="let element"> ${{element.value}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+  </mat-card-content>
 </mat-card>
