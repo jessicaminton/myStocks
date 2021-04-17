@@ -30,10 +30,6 @@ export class FavoritesComponent implements OnInit {
     private stockService: StockService) { }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.storage = JSON.parse(localStorage.getItem("user"));
-      this.name = this.storage["displayName"];
-    }, 1000);
     this.getCoins();
   }
 
@@ -48,6 +44,8 @@ export class FavoritesComponent implements OnInit {
   getCoins() {
     setTimeout(() => {
       this.coins = this.authService.coins;
+      this.favs = [];
+      console.log(this.coins);
       for(var i=0;i<this.coins[0][1].length; i++) {
         this.favs[i] = {coin: this.coins[0][1][i]};
       }
