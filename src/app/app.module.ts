@@ -32,6 +32,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 import { ExchangeRatesComponent } from './exchange-rates/exchange-rates.component';
+import {MatSelectModule} from '@angular/material/select';
 
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -79,6 +80,7 @@ const firebaseConfig = {
     FlexLayoutModule,
     MatTreeModule,
     OverlayModule,
+    MatSelectModule,
     AngularFirestoreModule,
     AngularFireModule.initializeApp(firebaseConfig), //initializes firebase on build
     AngularFireAuthModule

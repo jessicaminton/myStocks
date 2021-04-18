@@ -57,4 +57,16 @@ export class StockService {
     let url = "https://alpha-vantage.p.rapidapi.com/query";
     return this.http.get(url, this.httpOptions);
   }
+
+  exchangeRate(toCurrency: string) {
+    this.httpOptions = {
+      params: {from_currency: toCurrency, function: 'CURRENCY_EXCHANGE_RATE', to_currency: 'USD'},
+      headers: {
+        'x-rapidapi-key': '5fdedbbef3mshec20e9f64ba028fp1e433cjsn7bf6a02686d0',
+        'x-rapidapi-host': 'alpha-vantage.p.rapidapi.com'
+      }
+    };
+    let url = "https://alpha-vantage.p.rapidapi.com/query";
+    return this.http.get(url, this.httpOptions);
+  }
 }

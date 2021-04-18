@@ -6,6 +6,7 @@ import { StockService } from '../stock.service';
 import { Router } from '@angular/router';
 import { SYMBOL_DATA } from '../symbol-data';
 import { Symbol } from '../symbol';
+import { nav } from '../NavFillers';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +15,7 @@ import { Symbol } from '../symbol';
 })
 export class DashboardComponent implements OnInit {
 
+  fillerNav = nav;
   username: string;
   displayedColumns: string[] = ['position', 'symbol', 'name', 'button'];
   dataSource = new MatTableDataSource<Symbol>(SYMBOL_DATA);
