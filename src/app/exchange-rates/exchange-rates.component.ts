@@ -34,16 +34,16 @@ export class ExchangeRatesComponent implements OnInit {
     this.authService.logout();
   }
 
+  //takes the value in usd inpputted by the user, and the currency they want to convert to
   fetchRates(value: string, currencyTo: any) {
     this.stockService.exchangeRate(currencyTo.symbol)
     .subscribe(rate => {
       setTimeout(() => {
+        //turning strings into numbers to do math with and then rounding the numbers and turning it back into a string
         this.converted = (parseInt(value) / parseInt(rate["Realtime Currency Exchange Rate"]["5. Exchange Rate"].slice(0,-6))).toFixed(6);
         this.symbol = currencyTo.symbol;
-        this.searched = true;
+        this.searched = true; //shows the box with the results
       }, 1000);
     });
-    //this.searched = false;
-    
   }
 }

@@ -58,6 +58,7 @@ export class StockService {
     return this.http.get(url, this.httpOptions);
   }
 
+  //gets the exchange rate of cryptocurrencies
   exchangeRate(toCurrency: string) {
     this.httpOptions = {
       params: {from_currency: toCurrency, function: 'CURRENCY_EXCHANGE_RATE', to_currency: 'USD'},
