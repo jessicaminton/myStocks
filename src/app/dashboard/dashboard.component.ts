@@ -14,50 +14,50 @@ import { Symbol } from '../symbol';
 })
 export class DashboardComponent implements OnInit {
 
-  fillerNav = ["Cryptocurrency", "Stocks"];
-  storage: object;
   username: string;
   displayedColumns: string[] = ['position', 'symbol', 'name', 'button'];
   dataSource = new MatTableDataSource<Symbol>(SYMBOL_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
   data = SYMBOL_DATA;
   symbols: string[] = [];
-  icon: string = 'bookmark_add';
-  added: boolean = true;
 
   constructor(private authService: AuthService,
     private stockService: StockService,
-    public router: Router) {
-      
-     }
+    public router: Router) { }
 
   ngOnInit() {
     setTimeout(() => {
-      this.username = this.authService.displayName;
+      this.username = this.authService.displayName; //gets the display name from firebase
       this.authService.getCoins();
     }, 1000);
     
   }
 
+  //runs after the ui has loaded
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
 
+  //logs the user out
   logout() {
     this.authService.logout();
   }
 
-  viewDetails(sym) {
+  //function for the view button in the table
+  //takes the value of the row clicked and passes it to the stock service
+  viewDetails(sym:any) {
     this.stockService.setSymbol(sym.symbol);
     this.router.navigate(['/details']);
 
   }
 
+  //this is for the search bar
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  //navigates too favorites page
   goToFavs() {
     this.router.navigate(['/favorites']);
   }

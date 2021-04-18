@@ -33,27 +33,31 @@ export class FavoritesComponent implements OnInit {
     this.getCoins();
   }
 
+  //navs back to dashboard with list of cryptos
   home() {
     this.router.navigate(['/dashboard']);
   }
 
+  //logs user out
   logout() {
     this.authService.logout();
   }
 
+  //gets the array of coins from firestore
   getCoins() {
     setTimeout(() => {
       this.coins = this.authService.coins;
-      this.favs = [];
+      this.favs = []; //making this empty everytime to make sure we avoid adding duplicates to the same array
       console.log(this.coins);
       for(var i=0;i<this.coins[0][1].length; i++) {
         this.favs[i] = {coin: this.coins[0][1][i]};
       }
-      this.table.renderRows();
+      this.table.renderRows(); //refreshes the table to show the accurate cryptos saved
     }, 1000 );
   }
 
-  viewDetails(sym) {
+  //lets the user view the details of the crypto selected
+  viewDetails(sym:any) {
     this.stockService.setSymbol(sym.coin);
     this.router.navigate(['/details']);
   }
