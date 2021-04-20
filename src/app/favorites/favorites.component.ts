@@ -30,6 +30,9 @@ export class FavoritesComponent implements OnInit {
     private stockService: StockService) { }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.name = this.authService.displayName;
+    }, 1000);
     this.getCoins();
   }
 

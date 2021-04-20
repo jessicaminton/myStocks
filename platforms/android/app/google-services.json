@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "278510171062",
+    "project_id": "mycryptos",
+    "storage_bucket": "mycryptos.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:278510171062:android:9bf99401598926de85c717",
+        "android_client_info": {
+          "package_name": "io.cordova.hellocordova"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "278510171062-62g97gad6njg4o2dglo86n416ivnmlp9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6lvRkPBwmvF3j5u_7g0YL5_3k7CBuX7M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "278510171062-62g97gad6njg4o2dglo86n416ivnmlp9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
