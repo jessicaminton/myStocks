@@ -22,12 +22,12 @@
     <div class="content">
         <mat-form-field>
             <mat-label>Value</mat-label>
-            <input matInput type="text" #usd>
+            <input matInput type="text" #usd required>
             <span matSuffix>USD</span>
         </mat-form-field>
         <mat-form-field>
             <mat-label>To currency</mat-label>
-            <mat-select [(ngModel)]="selectedValue" #to name="to">
+            <mat-select #to name="to">
                 <mat-option *ngFor="let item of currency" [value]="item">{{item.symbol}}</mat-option>
             </mat-select>
         </mat-form-field>
@@ -35,7 +35,7 @@
         <br>
         <mat-form-field *ngIf="searched">
             <mat-label>Converted Currency</mat-label>
-            <input class="field" matInput disabled value="${{usd.value}} USD = {{converted}} {{symbol}}">
+            <input class="field" matInput disabled value="{{words}}">
         </mat-form-field>
     </div>
 </mat-sidenav-content>

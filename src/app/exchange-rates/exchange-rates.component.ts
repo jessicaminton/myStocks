@@ -15,9 +15,8 @@ export class ExchangeRatesComponent implements OnInit {
   fillerNav = nav;
   searched: boolean = false;
   currency = SYMBOL_DATA;
-  selectedValue: string;
   converted: string;
-  symbol: string;
+  words: string;
 
   constructor(private router: Router,
     private authService: AuthService,
@@ -40,8 +39,12 @@ export class ExchangeRatesComponent implements OnInit {
     .subscribe(rate => {
       setTimeout(() => {
         //turning strings into numbers to do math with and then rounding the numbers and turning it back into a string
-        this.converted = (parseInt(value) / parseInt(rate["Realtime Currency Exchange Rate"]["5. Exchange Rate"].slice(0,-6))).toFixed(6);
-        this.symbol = currencyTo.symbol;
+        if(value >= 'A' && value <= 'Z' || value>='a' && value <= 'z') {
+          this.words = "Please enter a valid number";
+        } else {
+          this.converted = (parseFloat(value) / parseFloat(rate["Realtime Currency Exchange Rate"]["5. Exchange Rate"].slice(0,-6))).toFixed(6);
+          this.words = "$" + value + " USD = " + this.converted + " " + currencyTo.symbol;
+        }
         this.searched = true; //shows the box with the results
       }, 1000);
     });
